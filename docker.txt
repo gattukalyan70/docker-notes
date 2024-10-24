@@ -1,0 +1,93 @@
+images is only read only Template (read only copy)
+docker hub---->application(image)---->container(running)
+for example we want mysql application build in docker command "docker full mysql" that time what is going on in terminal lot of mysql releted leyers downloded thats call layers
+we want docker history that time we have use this command promt "docker history nginx" after showing when the nginx releted changes when the date update all about showing nginx 
+docker commands
+1.docker images 
+2.docker full nginx
+3.docker ps
+4.docker ps -a
+5.docker stop (container id)
+6.docker start (container id)
+7.docker history
+8.docker pull nginx:(here write you want how much version of you want)
+9.docker rmi ngnix---this command you want delete nginx)
+hub.docker.com = called images repository 
+
+
+create images in terminal : docker create (past here image id)
+1. how to go to inside conatainer :docker exec -it 6bb0288ac7b5 /bin/bash
+2.secound step :  docker exec -it 6bb0288ac7b5 /bin/bash
+   we are into root container 
+3.ls
+4. ls -ltr( intarct with container)
+5.create one file ( touch new.txt)
+6. ls -lrt
+7.file inside write somthing ( echo "This file is new file" >> new.txt)
+8.cheking inside what is there ( cat new.txt)
+9. ls -ltr(see there we craete one txt file how much size consume)
+
+what is docker file how to build a docker image?
+------------------------------------------------------------------
+Dockerfile(using Atrributes)
+--------------------
+FROM       --------
+ADD                |
+COPY               |                                          
+CMD
+ENTRYPOINT         |        mostly using this atributes
+ENV
+EXPOSE             |
+MAINTAINER         |
+RUN                |
+USER               |
+VOLUME             
+WORKDIR            |
+LABEL       --------
+
+FROM ubuntu:18.04
+LABEL maintainer="thecloudspoc@gmail.com"
+
+RUN apt-get update && apt-get -y install apache2
+EXPOSE 80
+
+ENTRYPOINT ["/usr/sbin/apachectl"]
+CMD ["-D, "FOREGROUND"]	
+
+commands
+----------
+mkdire Dockerfile( create docker dorectrory)
+mkdir ubuntu_apache2_plain(create one more dorectrory)
+touch Dockerfile(createfile)
+nano Dockerfile (inside write someting releted to FROM, LABEL, RUN, ENTRYPOINT, CMD for example above cenario)
+docker images(check images is there or not incase images is there which type of images is there)
+ls
+docker build -dt gattukalyan70/ubapache2 .(build command , here gattukalyan70 means repository name & .(dat) means put .(dat) take currently repository only 
+docker images(check then new gattukalyan70/ubapache2 is biuld)
+docker run -dt --name kalyan -p 8080:80 513c42ea987e (run the command here 513c42ea987e means image id)
+docker ps -a
+ifconfig(docker host IP)
+docker run -dt --name ubapache2 -p 8081:80 kalyan/ubapache2
+mkdir ubuntu_apache2_custom_wp
+cd mkdir ubuntu_apache2_custom_wp
+touch Dockerfile(create inside Docker file )
+nano Dockerfile( inside write FROM ubuntu:18.04
+                              LABEL maintainer="thecloudspoc@gmail.com"
+
+                              RUN apt-get update && apt-get -y install apache2
+                              EXPOSE 80
+
+                              ENTRYPOINT ["/usr/sbin/apachectl"]
+                              CMD ["-D, "FOREGROUND"]
+
+                              COPY index.html /var/www/html/index.html
+                              VOLUME /var/www/html
+
+
+for example u crete container that container push to github application we need to use bellow commands
+
+docket tag gattukalyan/ubapache2 gattukalyan/ubapache2:v1
+docker push gattukalyan/ubapache2:v1(that incase showing access is denied we need to login docker login)
+successed move to dockerhub application go and chech dockerhub application there is available 
+
+ 
